@@ -1,0 +1,26 @@
+[Unit]
+Description=DixiCoin's distributed currency daemon
+After=network.target
+
+[Service]
+User=dixicoin
+Group=dixicoin
+
+Type=forking
+PIDFile=/var/lib/dixicoind/dixicoind.pid
+
+ExecStart=/usr/bin/dixicoind -daemon -pid=/var/lib/dixicoind/dixicoind.pid \
+          -conf=/etc/dixicoin/dixicoin.conf -datadir=/var/lib/dixicoind
+
+ExecStop=-/usr/bin/dixicoin-cli -conf=/etc/dixicoin/dixicoin.conf \
+         -datadir=/var/lib/dixicoind stop
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

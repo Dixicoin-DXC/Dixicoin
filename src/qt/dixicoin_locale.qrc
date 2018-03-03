@@ -1,0 +1,17 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="ca">locale/dixicoin_ca.qm</file>
+        <file alias="da">locale/dixicoin_da.qm</file>
+        <file alias="de">locale/dixicoin_de.qm</file>
+        <file alias="en">locale/dixicoin_en.qm</file>
+        <file alias="en_US">locale/dixicoin_en_US.qm</file>
+        <file alias="es">locale/dixicoin_es.qm</file>
+        <file alias="fr_FR">locale/dixicoin_fr_FR.qm</file>
+        <file alias="it">locale/dixicoin_it.qm</file>
+        <file alias="ja">locale/dixicoin_ja.qm</file>
+        <file alias="pt">locale/dixicoin_pt.qm</file>
+        <file alias="ro_RO">locale/dixicoin_ro_RO.qm</file>
+        <file alias="ru">locale/dixicoin_ru.qm</file>
+        <file alias="zh_TW">locale/dixicoin_zh_TW.qm</file>
+    </qresource>
+</RCC>

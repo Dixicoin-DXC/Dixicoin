@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=DixiCoin
+Comment=DixiCoin P2P Cryptocurrency
+Comment[fr]=DixiCoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=DixiCoin, eşten eşe kriptografik sanal para birimi
+Exec=dixicoin-qt %u
+Terminal=false
+Type=Application
+Icon=dixicoin128
+MimeType=x-scheme-handler/dixicoin;
+Categories=Office;Finance;

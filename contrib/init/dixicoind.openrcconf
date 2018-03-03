@@ -1,0 +1,26 @@
+# /etc/conf.d/dixicoind: config file for /etc/init.d/dixicoind
+
+# Config file location
+#BITCOIND_CONFIGFILE="/etc/dixicoin/dixicoin.conf"
+
+# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
+#BITCOIND_PIDDIR="/var/run/dixicoind"
+
+# What filename to give the pidfile
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/dixicoind.pid"
+
+# Where to write dixicoind data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/dixicoind"
+
+# User and group to own dixicoind process
+#BITCOIND_USER="dixicoin"
+#BITCOIND_GROUP="dixicoin"
+
+# Path to dixicoind executable
+#BITCOIND_BIN="/usr/bin/dixicoind"
+
+# Nice value to run dixicoind under
+#BITCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+BITCOIND_OPTS=""
