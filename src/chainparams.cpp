@@ -90,7 +90,7 @@ public:
         pchMessageStart[1] = 0x22;
         pchMessageStart[2] = 0x00;
         pchMessageStart[3] = 0xaa;
-        vAlertPubKey = ParseHex("04d6d976efad463fa258e3699e9c3fea60d5168a065abb5829a77448d25e0acbee58bb8f5be56491624b9a48611a8c456a592d45f48ea9c9f0bdc30904534be285");
+        vAlertPubKey = ParseHex("03b883ce7982b6296d2f864a51eb0c743722102ebe81896524751b1bd33b174589");
         nDefaultPort = 61150;
         bnProofOfWorkLimit = ~uint256(0) >> 20; // DixiCoin starting difficulty is 1 / 2^12
         nSubsidyHalvingInterval = 210000;
@@ -145,7 +145,7 @@ public:
         fTestnetToBeDeprecatedFieldRPC = false;
         fHeadersFirstSyncingActive = false;
         nPoolMaxTransactions = 3;
-        strSporkKey = "04d6d976efad463fa258e3699e9c3fea60d5168a065abb5829a77448d25e0acbee58bb8f5be56491624b9a48611a8c456a592d45f48ea9c9f0bdc30904534be285";
+        strSporkKey = "03b883ce7982b6296d2f864a51eb0c743722102ebe81896524751b1bd33b174589";
         
         strObfuscationPoolDummyAddress = "DWSbBnzmNkjDVaYHX7vkL1MqD96pRYWtZo";
         nStartMasternodePayments = 1403728576; //Wed, 25 Jun 2014 20:36:16 GMT
@@ -184,10 +184,7 @@ public:
         //assert(hashGenesisBlock == uint256("0x0000041e482b9b9691d98eefb48473405c0b8ec31b76df3797c74a78680ef818"));
         vFixedSeeds.clear();
         vSeeds.clear();
-        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "dixicoin-testnet.seed.fuzzbawls.pw"));
-        vSeeds.push_back(CDNSSeedData("fuzzbawls.pw", "dixicoin-testnet.seed2.fuzzbawls.pw"));
-        vSeeds.push_back(CDNSSeedData("s3v3nh4cks.ddns.net", "s3v3nh4cks.ddns.net"));
-        vSeeds.push_back(CDNSSeedData("88.198.192.110", "88.198.192.110"));
+        vSeeds.push_back(CDNSSeedData("", ""));
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 139); // Testnet dixicoin addresses start with 'x' or 'y'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);  // Testnet dixicoin script addresses start with '8' or '9'
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 239);     // Testnet private keys start with '9' or 'c' (Bitcoin defaults)
