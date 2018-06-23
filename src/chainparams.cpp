@@ -98,7 +98,7 @@ public:
         nMinerThreads = 0;
         nTargetTimespan = 1 * 60; // DixiCoin: 1 minute
         nTargetSpacing = 1 * 60;  // DixiCoin: 1 minute
-        nLastPOWBlock = 259200;
+        nLastPOWBlock = 159700;
         nMaturity = 60;
         nModifierUpdateBlock = 1;
 		

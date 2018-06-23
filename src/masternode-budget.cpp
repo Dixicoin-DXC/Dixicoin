@@ -796,15 +796,17 @@ CAmount CBudgetManager::GetTotalBudget(int nHeight)
 
     //get block value and calculate from that
     CAmount nSubsidy = 0;
-    if (nHeight <= 720 && nHeight > 0) {
+    if (nHeight == 0) {
+        nSubsidy = 300000 * COIN;
+    } else if (nHeight <= 720 && nHeight > 0) {
         nSubsidy = 0 * COIN;
-    } else if (nHeight <= 600000 && nHeight >= 720) {
+    } else if (nHeight <= 300000 && nHeight > 72) {
         nSubsidy = 5 * COIN;
-    } else if (nHeight > 600000) {
-        nSubsidy = 2.5 * COIN;
+	} else if (nHeight > 300000) {
+		nSubsidy = 3 * COIN;
     } else {
         nSubsidy = 0 * COIN;
-}
+    }
 		     return ((nSubsidy / 100) * 10) * 1440 * 30;  
 }
 
