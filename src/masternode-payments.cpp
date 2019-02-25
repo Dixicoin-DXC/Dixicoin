@@ -288,10 +288,10 @@ bool IsBlockPayeeValid(const CBlock& block, int nBlockHeight)
 			}
 
 
-			if(IsSporkActive(SPORK_17_TREASURY_PAYMENT_ENFORCEMENT))
+			if(IsSporkActive(SPORK_15_TREASURY_PAYMENT_ENFORCEMENT))
 				return false;
 			else {
-			    LogPrint("masternode","SPORK_17_TREASURY_PAYMENT_ENFORCEMENT is not enabled, accept anyway\n");
+			    LogPrint("masternode","SPORK_15_TREASURY_PAYMENT_ENFORCEMENT is not enabled, accept anyway\n");
 				return true;
 			}
 		} else {
