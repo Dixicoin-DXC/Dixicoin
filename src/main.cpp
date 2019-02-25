@@ -1661,7 +1661,7 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
     return ret;
 }
 	
-int nStartTreasuryBlock = 41500;
+int nStartTreasuryBlock = 505000;
 int nTreasuryBlockStep = 1440;
 
 bool IsTreasuryBlock(int nHeight)
