@@ -9,6 +9,8 @@
 #include "random.h"
 #include "util.h"
 #include "utilstrencodings.h"
+#include "net.h"
+#include "base58.h"
 #include <assert.h>
 #include <boost/assign/list_of.hpp>
 using namespace std;
@@ -85,6 +87,7 @@ public:
     {
         networkID = CBaseChainParams::MAIN;
         strNetworkID = "main";
+		vTreasuryRewardAddress="DTX8oihXAa2d3pqdCHVu2obvq6JePAjWHG";
         /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
@@ -159,6 +162,20 @@ public:
         return data;
     }
 };
+
+std::string CChainParams::GetTreasuryRewardAddressAtHeight(int nHeight) const {
+    return vTreasuryRewardAddress;
+}
+
+CScript CChainParams::GetTreasuryRewardScriptAtHeight(int nHeight) const {
+    CBitcoinAddress address(GetTreasuryRewardAddressAtHeight(nHeight).c_str());
+    assert(address.IsValid());
+
+    CScript script = GetScriptForDestination(address.Get());
+    return script; 
+}
+
+
 static CMainParams mainParams;
 /**
  * Testnet (v3)

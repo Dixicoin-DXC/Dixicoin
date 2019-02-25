@@ -245,14 +245,70 @@ bool IsBlockPayeeValid(const CBlock& block, int nBlockHeight)
         }
     }
 
-    //check for masternode payee
-    if (masternodePayments.IsTransactionValid(txNew, nBlockHeight))
-        return true;
-    LogPrintf("Invalid mn payment detected %s\n", txNew.ToString().c_str());
+    //check if it's valid treasury block
+    if(IsTreasuryBlock(nBlockHeight-1) || IsTreasuryBlock(nBlockHeight) || IsTreasuryBlock(nBlockHeight+1)) {
+		LogPrint("masternode","IsBlockPayeeValid: Check treasury reward!!!\n");
+		return true;
 
-    if (IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT))
-        return false;
-    LogPrintf("Masternode payment enforcement is disabled, accepting block\n");
+		CScript treasuryPayee = Params().GetTreasuryRewardScriptAtHeight(nBlockHeight);
+		CAmount treasuryAmount = GetTreasuryAward(nBlockHeight-1) - 10 * COIN;
+		LogPrint("masternode","IsBlockPayeeValid, expected treasury amount is %lld, coins %f\n", treasuryAmount, (float)treasuryAmount / COIN);
+
+		bool bFound = false;
+
+		BOOST_FOREACH (CTxOut out, txNew.vout) {
+
+			CTxDestination address1;
+			ExtractDestination(out.scriptPubKey, address1);
+			CBitcoinAddress address2(address1);
+
+			LogPrint("masternode","IsBlockPayeeValid, txOut: address %s, value is %lld\n", address2.ToString(), out.nValue);
+			if(out.nValue == treasuryAmount)
+				LogPrintf("Found treasure!\n");
+			else {
+
+			}
+		}
+
+		if(!bFound) {
+			//LogPrint("masternode","Invalid treasury payment detected %s\n", txNew.ToString().c_str());
+			LogPrint("masternode","Invalid treasury payment detected %s\n", txNew.ToString().c_str());
+
+			LogPrint("masternode","Check transaction, expected treasury reward is %0.2f\n", treasuryAmount / COIN);
+			BOOST_FOREACH (CTxOut out, txNew.vout) {
+
+				CTxDestination address1;
+				ExtractDestination(out.scriptPubKey, address1);
+				CBitcoinAddress address2(address1);
+
+				LogPrint("masternode","Out: address %s, value is %f\n", address2.ToString(), out.nValue);
+				if(out.nValue == treasuryAmount) {
+					LogPrintf("Found treasure!\n");
+					}
+			}
+
+
+			if(IsSporkActive(SPORK_17_TREASURY_PAYMENT_ENFORCEMENT))
+				return false;
+			else {
+			    LogPrint("masternode","SPORK_17_TREASURY_PAYMENT_ENFORCEMENT is not enabled, accept anyway\n");
+				return true;
+			}
+		} else {
+			LogPrint("masternode","Valid treasury payment detected %s\n", txNew.ToString().c_str());
+			return true;
+		}
+
+	} else {
+	    //check for masternode payee
+	    if (masternodePayments.IsTransactionValid(txNew, nBlockHeight))
+	        return true;
+	    LogPrint("masternode","Invalid mn payment detected %s\n", txNew.ToString().c_str());
+
+	    if (IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT))
+	        return false;
+	    LogPrint("masternode","Masternode payment enforcement is disabled, accepting block\n");
+    }
 
     return true;
 }
@@ -265,6 +321,8 @@ void FillBlockPayee(CMutableTransaction& txNew, int64_t nFees, bool fProofOfStak
 
     if (IsSporkActive(SPORK_13_ENABLE_SUPERBLOCKS) && budget.IsBudgetPaymentBlock(pindexPrev->nHeight + 1)) {
         budget.FillBlockPayee(txNew, nFees, fProofOfStake);
+	} else if(IsTreasuryBlock(pindexPrev->nHeight)) {
+		budget.FillTreasuryBlockPayee(txNew, nFees, fProofOfStake);
     } else {
         masternodePayments.FillBlockPayee(txNew, nFees, fProofOfStake);
     }
