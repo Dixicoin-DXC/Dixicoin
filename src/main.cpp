@@ -5427,6 +5427,11 @@ int ActiveProtocol()
         if (chainActive.Tip()->nHeight >= Params().ModifierUpgradeBlock())
             return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
     }
+	
+	if (IsSporkActive(SPORK_16_NEW_PROTOCOL_ENFORCEMENT_2)) {
+        if (chainActive.Tip()->nHeight >= Params().ModifierUpgradeBlock())
+            return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_2;
+    }
 
     return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
 }
