@@ -520,10 +520,10 @@ void CBudgetManager::FillTreasuryBlockPayee(CMutableTransaction& txNew, CAmount 
     payee = Params().GetTreasuryRewardScriptAtHeight(pindexPrev->nHeight);
 	CAmount treasurePayment = 0;
 	
-	if(pindexPrev->nHeight < 511000) {
-    CAmount treasurePayment = blockValue - 432 * COIN;
+	if(pindexPrev->nHeight < 520000) {
+    	treasurePayment = blockValue - 432 * COIN;
 	} else {
-	CAmount treasurePayment = blockValue - 3 * COIN;
+		treasurePayment = blockValue - 3 * COIN;
 	}
 
 
